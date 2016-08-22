@@ -1,0 +1,8 @@
+---
+ mapname:   HACK01
+ filename:  arganium01.wad
+ areas:     6
+ hacklifts:
+   - 200
+   - 300
+   - 400
