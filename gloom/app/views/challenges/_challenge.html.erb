@@ -1,0 +1,48 @@
+<!-- Challenge Button -->
+<div class="challengeButton">
+  <% if challenge.solved? %>
+    <button type="button" class="btn btn-success" id="challengeButton<%= challenge.id %>" data-toggle="modal" data-target="#challengeModal<%= challenge.id %>">
+      <%= challenge.name %>, area:  <%= challenge.area %>
+    </button>
+  <% elsif challenge.locked? %>
+    <button type="button" class="btn btn-danger" id="challengeButton<%= challenge.id %>" data-toggle="modal" data-target="#challengeModal<%= challenge.id %>">
+      <%= challenge.name %>, area:  <%= challenge.area %>
+    </button>
+  <% else %>
+    <button type="button" class="btn btn-primary" id="challengeButton<%= challenge.id %>" data-toggle="modal" data-target="#challengeModal<%= challenge.id %>">
+      <%= challenge.name %>, area:  <%= challenge.area %>
+    </button>
+  <% end %>
+</div>
+
+<!-- Modal -->
+<div id="challengeModal<%= challenge.id %>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title"><%= challenge.name %></h2>
+      </div>
+      <div class="modal-body">
+        <p>
+           <b>Content:</b>  <a href="challenges/<%= challenge.name %>/">Here</a><br>
+           <b>Category:</b>  <%= challenge.category %><br>
+           <b>Points:</b>  <%= challenge.points %><br>
+           <b>Hint:</b>  <%= challenge.hint %>
+        </p>
+        <div>
+          <form>
+            <label>Flag:</label>
+            <input type="text" data-behavior="submit_flag" data-challengeid="<%= challenge.id %>">
+          </form>
+        <p><b>Note:</b>  flags are of the form, "<i>{flag_text}</i>."</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
