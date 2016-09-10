@@ -1,0 +1,156 @@
+require 'singleton'
+require 'open3'
+
+class CertainServer
+  include Singleton
+
+  def initialize(*args)
+
+    # All normal enemy types supported for spawning
+    @enemy_type = [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      19,
+      20,
+      110,
+      111,
+      112,
+      113,
+      115,
+      116
+    ]
+
+    # All boss enemy types supported for spawning
+    @boss_type = [
+      7,
+      114
+    ]
+
+    asset_package        = File.join(Rails.root, "../assets/arganium.pk3")
+    certain_bin          = File.join(Rails.root, "../certain/bin/certain.rb")
+    map_file             = File.join(Rails.root, "../levels/#{Level.first.file.gsub(".wad", "")}/#{Level.first.file}")
+    map_name             = Level.first.name
+    @numareas            = Challenge.select(:area).distinct.count - 1
+    gamewad              = Option.where(:name => "gamewad").pluck(:value)[0]
+    @curmarines          = 0
+    @maxmarines          = Integer(Option.where(:name => "marines").pluck(:value)[0])
+    @launch_command      = "#{certain_bin} --iwad #{gamewad} --wadfiles #{map_file} --assets #{asset_package} --level #{map_name} --marines #{@maxmarines}"
+    @spawn_boss_loop     = ''
+    @spawn_enemy_loop    = ''
+    @spawn_timer         = 15
+    @running             = false
+
+    super(*args)
+  end
+
+  def run
+    (puts "Server already running" && return) if running?
+
+    @certain_server_in_pipe, @out_pipe = Open3.popen2 "#{@launch_command}"
+    @running = true
+
+    while certain_output = @out_pipe.gets
+      data_string = Sanitize.clean(certain_output.chomp)
+      GameLog.create!(content: data_string)
+
+      case data_string
+
+      # Players activated a Hackswitch
+      when /\AArea [0-9]+ Hackswitch activated!\z/
+        area = get_area(data_string)
+        unlock(area)
+
+        @spawn_enemy_loop = Thread.new do
+          loop do
+            spawn_enemies(area)
+            sleep(@spawn_timer)
+          end
+        end
+
+      # Players unlocked a secret area
+      when /\ASecret found!\z/
+        push_secret
+        unlock(0)
+
+      # Check for players reconnecting after death
+      when /\A.+ has entered the game\.\z/
+        push_marines
+        if check_marines
+          puts "Marines are cheating!"
+          @spawn_boss_loop = Thread.new do
+            loop do
+              (1..@numareas).each { |n| spawn_bosses(n) }
+              sleep(@spawn_timer)
+            end
+          end
+        end
+
+      # Kick player when dead
+      when /\A.+ has died\.\z/
+        playername = data_string.split(" ").first
+        kick_player(playername)
+
+      else
+        puts "Unhandled Certain command: #{data_string}."
+      end
+    end
+  end
+
+  def check_marines
+    @curmarines > @maxmarines
+  end
+
+  def push_marines
+    @curmarines+=1
+  end
+
+  def push_secret
+    s = Secret.first
+    s.increment_found_count
+    puts "Secrets found:  #{s.found}"
+  end
+
+  def unlock(area_num)
+    Challenge.where(area: area_num).find_each { |a| a.unlock }
+  end
+
+  def running?
+    @running
+  end
+
+  def spawn_bosses(area_num)
+    puts "Spawning bosses in Area #{area_num}."
+    update("spawnenemy #{area_num}1 #{@boss_type.to_a.sample}")
+  end
+
+  def spawn_enemies(area_num)
+    puts "Spawning enemies in Area #{area_num}."
+    update("spawnenemy #{area_num}1 #{@enemy_type.to_a.sample}")
+  end
+
+  def stop_spawn_enemies
+    @spawn_enemy_loop.kill
+  end
+
+  def kick_player(playername)
+    update("kick #{playername}")
+  end
+
+  def update(message)
+    @certain_server_in_pipe.puts("#{message}")
+  end
+
+  private
+
+  def get_area(data_string)
+    data_arr = data_string.split(" ")
+    i = data_arr.each_index.select{ |j| data_arr[j] == 'Area' }
+    data_arr[i.first + 1]
+  end
+end
