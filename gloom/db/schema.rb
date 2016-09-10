@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725044125) do
+ActiveRecord::Schema.define(version: 20160910210847) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 20160725044125) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string   "name"
+    t.text     "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
