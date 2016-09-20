@@ -44,6 +44,7 @@ class CertainServer
     @spawn_boss_loop     = ''
     @spawn_enemy_loop    = ''
     @spawn_timer         = 15
+    @boss_spawn_timer    = 1
     @running             = false
 
     super(*args)
@@ -85,8 +86,10 @@ class CertainServer
           puts "Marines are cheating!"
           @spawn_boss_loop = Thread.new do
             loop do
-              (1..@numareas).each { |n| spawn_bosses(n) }
-              sleep(@spawn_timer)
+              (1..@numareas).each do |n|
+                spawn_bosses(n)
+                sleep(@boss_spawn_timer)
+              end
             end
           end
         end
