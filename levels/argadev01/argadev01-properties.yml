@@ -1,0 +1,6 @@
+---
+ mapname:   DEV01
+ filename:  argadev01.wad
+ areas:     2
+ hacklifts:
+   - 50
