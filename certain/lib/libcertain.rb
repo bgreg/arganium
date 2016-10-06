@@ -72,7 +72,8 @@ class GameCommand < GameEvent
     @commands = Regexp.union [ /^Secret\ found!$/,
                   /^Area\ \d+\ Hackswitch\ activated!$/,
                   /^.+\ has\ entered\ the\ game\.$/,
-                  /^.+\ has\ died\.$/ ]
+                  /^.+\ has\ died\.$/,
+                  /^Level\ stat:.*$/ ]
   end
 
   # Translate the requested text into a command
