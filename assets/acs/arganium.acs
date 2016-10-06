@@ -12,16 +12,30 @@ script "Arganium Welcome" OPEN net
 script "Arganium EnteredGame" ENTER net
 {
         int playernum;
-		playernum = PlayerNumber();
-        Log(n:playernum,s:" has entered the game.");
+                playernum = PlayerNumber();
+        Log(n:playernum, s:" has entered the game.");
 }
 
 // Death announcment
 script "Arganium PlayerDied" DEATH net
 {
         int playernum;
-		playernum = PlayerNumber();
-        Log(n:playernum,s:" has died.");
+                playernum = PlayerNumber();
+        Log(n:playernum, s:" has died.");
+}
+
+// End of level stats
+script "Arganium LevelStats" UNLOADING net
+{
+        int timetaken;
+                timetaken = GetLevelInfo (LEVELINFO_SUCK_TIME);
+        int killedmonsters;
+                killedmonsters = GetLevelInfo (LEVELINFO_KILLED_MONSTERS);
+        int numsecrets;
+                numsecrets = GetLevelInfo (LEVELINFO_FOUND_SECRETS);
+        Log(s:"Level stat: time ", d:timetaken);
+        Log(s:"Level stat: kills ", d:killedmonsters);
+        Log(s:"Level stat: secrets ", d:numsecrets);
 }
 
 // This script allows Hackdoors to function.
