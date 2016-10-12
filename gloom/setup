@@ -50,7 +50,7 @@ if ARGV[0] != nil then
       for i in 1..hdconfig.areas do
         hdconfig.core[(i - 1)].each do |challname|
           challenge = YAML::load_file("../challenges/#{challname}/info.yaml")
-          f.puts "Challenge.create(:name => \"#{challenge["name"]}\", :area => \"#{i}\", :flag => \"#{challenge["flag"]}\", :category => \"#{challenge["category"]}\", :hint => \"#{challenge["hint"]}\", :points => \"1\")"
+          f.puts "Challenge.create(:name => \"#{challenge["name"]}\", :area => \"#{i}\", :flag => \"#{challenge["flag"]}\", :category => \"#{challenge["category"]}\", :hint => \"#{challenge["hint"]}\", :points => \"#{challenge["points"]}\")"
         end
       end
 
