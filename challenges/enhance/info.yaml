@@ -2,7 +2,7 @@
 name:                 "enhance"
 author:               "FOXX"
 flag:                 "{zoom_&_enhance}"
-level:                "1"
+points:               "20"
 category:             "steganography"
 hint:                 "layers"
 description:          >

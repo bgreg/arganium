@@ -2,7 +2,7 @@
 name:                 "brutus"
 author:               "FOXX"
 flag:                 "{drink_your_ovaltine}"
-level:                "1"
+points:               "10"
 category:             "cryptography"
 hint:                 "Then fall Caesar"
 description:          >
