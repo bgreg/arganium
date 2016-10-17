@@ -99,10 +99,31 @@ class CertainServer
         playername = data_string.split(" ").first
         kick_player(playername)
 
+      # Update score
+      when /\ALevel\ stat:.*\z/
+        if data_string.split(" ").slice(2) == "end"
+          puts "Game Over"
+          calculate_score
+        else if data_string.split(" ").count > 2
+          update_score( data_string.split(" ").slice(2), data_string.split(" ").slice(3) )
+        else
+          puts "Marines are cheating!"
+          @spawn_boss_loop = Thread.new do
+            loop do
+              (1..@numareas).each do |n|
+                spawn_bosses(n)
+                sleep(@boss_spawn_timer)
+              end
+            end
+          end
+
       else
         puts "Unhandled Certain command: #{data_string}."
       end
     end
+  end
+
+  def calculate_score
   end
 
   def check_marines
@@ -121,6 +142,9 @@ class CertainServer
 
   def unlock(area_num)
     Challenge.where(area: area_num).find_each { |a| a.unlock }
+  end
+
+  def update_score(key, value)
   end
 
   def running?
