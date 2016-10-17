@@ -19,7 +19,6 @@ class CertainServer
       19,
       20,
       110,
-      111,
       112,
       113,
       115,
@@ -29,6 +28,7 @@ class CertainServer
     # All boss enemy types supported for spawning
     @boss_type = [
       7,
+      111,
       114
     ]
 
