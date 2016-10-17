@@ -104,7 +104,7 @@ class CertainServer
         if data_string.split(" ").slice(2) == "end"
           puts "Game Over"
           calculate_score
-        else if data_string.split(" ").count > 2
+        elsif data_string.split(" ").count > 2
           update_score( data_string.split(" ").slice(2), data_string.split(" ").slice(3) )
         else
           puts "Marines are cheating!"
@@ -116,6 +116,7 @@ class CertainServer
               end
             end
           end
+        end
 
       else
         puts "Unhandled Certain command: #{data_string}."
