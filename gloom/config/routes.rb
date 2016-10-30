@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
+  resources :scores, only: [:index]
+
   get 'rooms/show'
   get 'rooms', to: 'rooms#show'
 
