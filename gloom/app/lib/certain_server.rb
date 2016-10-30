@@ -125,6 +125,12 @@ class CertainServer
   end
 
   def calculate_score
+    time_score       = Score.where(:name => "time").pluck(:value)[0]
+    kill_score       = Score.where(:name => "kills").pluck(:value)[0]
+    secret_score     = Score.where(:name => "secrets").pluck(:value)[0]
+    challenge_score  = Score.where(:name => "challenges").pluck(:value)[0]
+    total_score      = time_score - (kill_score + challenge_score)
+    update_score("total", total_score)
   end
 
   def check_marines
@@ -146,6 +152,7 @@ class CertainServer
   end
 
   def update_score(key, value)
+    Score.where(name: key).find_each { |a| a.update(value) }
   end
 
   def running?
