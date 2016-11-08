@@ -33,10 +33,10 @@ script "Arganium LevelStats" UNLOADING net
                 killedmonsters = GetLevelInfo (LEVELINFO_KILLED_MONSTERS);
         int numsecrets;
                 numsecrets = GetLevelInfo (LEVELINFO_FOUND_SECRETS);
-        Log(s:"Level stat: end");
         Log(s:"Level stat: time ", d:timetaken);
         Log(s:"Level stat: kills ", d:killedmonsters);
         Log(s:"Level stat: secrets ", d:numsecrets);
+        Log(s:"Level stat: end");
 }
 
 // This script allows Hackdoors to function.
