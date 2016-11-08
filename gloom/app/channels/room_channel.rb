@@ -45,6 +45,8 @@ class RoomChannel < ApplicationCable::Channel
           # Score flag
           # Mark challenge as solved
           Challenge.find(data['id']).solve
+	  newScore = Challenge.find(data['id']).points + Score.where(:name => "challenges").pluck(:value)[0]
+	  Score.where(name: "challenges").find_each { |a| a.update(newScore) }
 
           # Core Challenge?
           currentArea = Challenge.find(data['id']).area.to_i
