@@ -152,7 +152,7 @@ class CertainServer
   end
 
   def update_score(key, value)
-    Score.where(name: key).find_each { |a| a.update(value) }
+    Score.where(name: key).find_each { |a| a.update_value(value) }
   end
 
   def running?
