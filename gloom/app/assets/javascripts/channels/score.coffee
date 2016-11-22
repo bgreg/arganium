@@ -1,4 +1,4 @@
-App.room = App.cable.subscriptions.create "ScoreChannel",
+App.score = App.cable.subscriptions.create "ScoreChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
 
