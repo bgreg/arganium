@@ -13,6 +13,8 @@ class ScoreBroadcastJob < ApplicationJob
         ActionCable.server.broadcast 'score_channel', challenges: score
       when 'total'
         ActionCable.server.broadcast 'score_channel', total: score
+      else
+	puts 'Unhandled type'
       end
   end
 end
