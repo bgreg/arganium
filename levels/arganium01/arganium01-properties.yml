@@ -2,6 +2,7 @@
  mapname:   HACK01
  filename:  arganium01.wad
  areas:     6
+ par:       1200
  hacklifts:
    - 200
    - 300
