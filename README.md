@@ -1,4 +1,4 @@
-![Arganium](/artwork/arganium%20logo.png?raw=true "Arganium")
+![Arganium](/artwork/arganium%20logo-small.png?raw=true "Arganium")
 
 Arganium is a cooperative hacking shooter.  It blends old-school first person shooting and modern hacker CTF.  In this repo you'll find everything you need to get started playing, building, and modifying Arganium.  More extensive information on the gameplay, design, and components is located in the [wiki](https://github.com/frozenfoxx/arganium/wiki).
 
