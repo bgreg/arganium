@@ -4,7 +4,7 @@ require 'yaml'
 # Objects
 class GameConfig
 
-  attr_accessor :name, :mapname, :mapfile, :areas, :numcore, :hacklifts, :core, :edge, :gamewad, :marines
+  attr_accessor :name, :mapname, :mapfile, :areas, :par, :numcore, :hacklifts, :core, :edge, :gamewad, :marines
 end
 
 # Functions
@@ -36,7 +36,7 @@ if ARGV[0] != nil then
     open('./db/seeds.rb', 'a') { |f|
       f.puts "Option.create(:name => \"gamewad\", :value => \"#{hdconfig.gamewad}\")"
       f.puts "Option.create(:name => \"marines\", :value => \"#{hdconfig.marines}\")"
-      f.puts "Level.create(:name => \"#{hdconfig.mapname}\", :file => \"#{hdconfig.mapfile}\")"
+      f.puts "Level.create(:name => \"#{hdconfig.mapname}\", :file => \"#{hdconfig.mapfile}\", :par => \"#{hdconfig.par}\")"
       f.puts "Score.create(:name => \"time\", :value => 0)"
       f.puts "Score.create(:name => \"kills\", :value => 0)"
       f.puts "Score.create(:name => \"secrets\", :value => 0)"
@@ -88,10 +88,11 @@ else
   level = YAML.load_file("../levels/#{levelchoice}/#{levelchoice}-properties.yml")
 
   # Set config values from level
-  hdconfig.mapname = level["mapname"]
-  hdconfig.mapfile = level["filename"]
-  hdconfig.areas = level["areas"]
-  hdconfig.hacklifts = level["hacklifts"] 
+  hdconfig.mapname   = level['mapname']
+  hdconfig.mapfile   = level['filename']
+  hdconfig.areas     = level['areas']
+  hdconfig.par       = level['par']
+  hdconfig.hacklifts = level['hacklifts'] 
 
   # Acquire the Challenges available and properly format for whiptail
   challenges = dirEntries('../challenges')

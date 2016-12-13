@@ -41,6 +41,7 @@ class CertainServer
     @curmarines          = 0
     @maxmarines          = Integer(Option.where(:name => "marines").pluck(:value)[0])
     @launch_command      = "#{certain_bin} --iwad #{gamewad} --wadfiles #{map_file} --assets #{asset_package} --level #{map_name} --marines #{@maxmarines}"
+    @par_time_bonus      = 500
     @spawn_boss_loop     = ''
     @spawn_enemy_loop    = ''
     @spawn_timer         = 15
@@ -125,11 +126,19 @@ class CertainServer
   end
 
   def calculate_score
-    time_score       = Score.where(:name => "time").pluck(:value)[0]
+    time_taken       = Score.where(:name => "time").pluck(:value)[0]
+    par_time         = Level.first.par
     kill_score       = Score.where(:name => "kills").pluck(:value)[0]
     secret_score     = Score.where(:name => "secrets").pluck(:value)[0]
     challenge_score  = Score.where(:name => "challenges").pluck(:value)[0]
-    total_score      = time_score - (kill_score + challenge_score)
+
+    # Check if the players were under the par time
+    if time_taken <= par_time
+      total_score    = @par_time_bonus + kill_score + challenge_score
+    else
+      total_score    = kill_score + challenge_score
+    end
+
     update_score("total", total_score)
   end
 
