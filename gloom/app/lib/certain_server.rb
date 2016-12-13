@@ -127,7 +127,7 @@ class CertainServer
 
   def calculate_score
     time_taken       = Score.where(:name => "time").pluck(:value)[0]
-    par_time         = Level.where(:name => "par").pluck(:value)[0]
+    par_time         = Level.first.par
     kill_score       = Score.where(:name => "kills").pluck(:value)[0]
     secret_score     = Score.where(:name => "secrets").pluck(:value)[0]
     challenge_score  = Score.where(:name => "challenges").pluck(:value)[0]
