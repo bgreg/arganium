@@ -4,7 +4,7 @@ require 'yaml'
 # Objects
 class GameConfig
 
-  attr_accessor :name, :mapname, :mapfile, :areas, :par, :numcore, :hacklifts, :core, :edge, :gamewad, :marines
+  attr_accessor :name, :mapname, :mapfile, :areas, :par, :numcore, :hacklifts, :core, :edge, :gamewad, :marines, :finishscript
 end
 
 # Functions
@@ -36,6 +36,7 @@ if ARGV[0] != nil then
     open('./db/seeds.rb', 'a') { |f|
       f.puts "Option.create(:name => \"gamewad\", :value => \"#{hdconfig.gamewad}\")"
       f.puts "Option.create(:name => \"marines\", :value => \"#{hdconfig.marines}\")"
+      f.puts "Option.create(:name => \"finishscript\", :value => \"#{hdconfig.finishscript}\")"
       f.puts "Level.create(:name => \"#{hdconfig.mapname}\", :file => \"#{hdconfig.mapfile}\", :par => \"#{hdconfig.par}\")"
       f.puts "Score.create(:name => \"time\", :value => 0)"
       f.puts "Score.create(:name => \"kills\", :value => 0)"
@@ -131,6 +132,9 @@ else
   # Store Challenges
   hdconfig.core = corechallenges
   hdconfig.edge = edgechallenges
+
+  # Set desired finish script
+  hdconfig.finishscript = `whiptail --title "Finish Script (optional)" --inputbox "Please input the path to a script to run upon completion (leave blank if not desired):" 10 40 3>&1 1>&2 2>&3`
 
   # Supply configuration name
   hdconfig.name = `whiptail --title "Configuration Name" --inputbox "Please supply a configuration name:" 10 40 3>&1 1>&2 2>&3`
