@@ -39,6 +39,7 @@ class CertainServer
     @numareas            = Challenge.select(:area).distinct.count - 1
     gamewad              = Option.where(:name => "gamewad").pluck(:value)[0]
     @curmarines          = 0
+    @finishscript        = Option.where(:name => "finishscript").pluck(:value)[0]
     @maxmarines          = Integer(Option.where(:name => "marines").pluck(:value)[0])
     @launch_command      = "#{certain_bin} --iwad #{gamewad} --wadfiles #{map_file} --assets #{asset_package} --level #{map_name} --marines #{@maxmarines}"
     @par_time_bonus      = 500
