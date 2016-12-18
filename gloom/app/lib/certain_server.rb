@@ -141,10 +141,19 @@ class CertainServer
     end
 
     update_score("total", total_score)
+
+    # If a finish script has been specified, execute it
+    if @finishscript != ''
+      execute_finish_script(total_score, time_taken, par_time, kill_score, secret_score, challenge_score)
+    end
   end
 
   def check_marines
     @curmarines > @maxmarines
+  end
+
+  def execute_finish_script(total, time, par, kills, secrets, challenges)
+    `#{@finishscript} --total #{total} --time #{time} --par #{par} --kills #{kills} --secrets #{secrets} --challenges #{challenges}`
   end
 
   def push_marines
