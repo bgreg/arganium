@@ -37,4 +37,4 @@ else
 fi
 
 # Execute
-/opt/zandronum/zandronum -iwad ${GAMEWAD} -file ~/repos/arganium/assets/arganium.pk3 ${LEVELWAD} +connect ${TARGETHOST}
+/opt/zandronum/zandronum -iwad ${GAMEWAD} -file $(pwd)/../assets/arganium.pk3 ${LEVELWAD} +connect ${TARGETHOST}
