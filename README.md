@@ -8,6 +8,7 @@ Arganium is a cooperative hacking shooter.  It blends old-school first person sh
 * __certain:__ contains the Zandronum wrapper Certain which allows control of a Zandronum game server.
 * __gloom:__ contains the Rails-based web interface *Gloom* which Arganium uses to interact with Certain.
 * __levels:__ submitted levels for Arganium.  These all have to follow the conventions in the documentation but are otherwise ready to play.
+* __scripts:__ scripts for usage with Arganium.  Includes finishscripts, client scripts, and more.
 
 # Requirements
 * [Bootstrap](http://getbootstrap.com) 3
