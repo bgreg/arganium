@@ -6,6 +6,7 @@ Arganium is a cooperative hacking shooter.  It blends old-school first person sh
 * __artwork:__ various artwork related to the project.
 * __assets:__ all game assets created for Arganium.  This directory is the source for the *arganium.pk3* archive that's used to launch Arganium.
 * __certain:__ contains the Zandronum wrapper Certain which allows control of a Zandronum game server.
+* __challenges:__ contains off-the-shelf Challenges built for Arganium.
 * __gloom:__ contains the Rails-based web interface *Gloom* which Arganium uses to interact with Certain.
 * __levels:__ submitted levels for Arganium.  These all have to follow the conventions in the documentation but are otherwise ready to play.
 * __scripts:__ scripts for usage with Arganium.  Includes finishscripts, client scripts, and more.
