@@ -1,0 +1,9 @@
+---
+ mapname:   ARGA02
+ filename:  arganium02.wad
+ areas:     2
+ par:       600
+ hacklifts:
+   - 500
+   - 501
+   - 502
