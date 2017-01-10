@@ -16,4 +16,4 @@ The primary component to getting this up and running is the *setup* script.  It 
 * `./setup`
 * *Walkthrough prompts to create configuration YAML file*
 * `./setup <name of configuration file>`
-* `rails server`
+* `rails server -b 0.0.0.0`
