@@ -19,9 +19,7 @@ script "Arganium EnteredGame" ENTER net
 // Death announcment
 script "Arganium PlayerDied" DEATH net
 {
-        int playernum;
-                playernum = PlayerNumber();
-        Log(n:playernum, s:" has died.");
+        Log(n:0,s:" has died.");
 }
 
 // End of level stats
