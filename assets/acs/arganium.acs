@@ -11,15 +11,13 @@ script "Arganium Welcome" OPEN net
 // Entrance announcement
 script "Arganium EnteredGame" ENTER net
 {
-        int playernum;
-                playernum = PlayerNumber();
-        Log(n:playernum, s:" has entered the game.");
+        Log(n:0, s:" has entered the game.");
 }
 
 // Death announcment
 script "Arganium PlayerDied" DEATH net
 {
-        Log(n:0,s:" has died.");
+        Log(n:0, s:" has died.");
 }
 
 // End of level stats
