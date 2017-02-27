@@ -49,8 +49,8 @@ if ARGV[0] != nil then
         f.puts "Hackdoor.create(:sector => \"#{i}\")"
       end
 
-      hdconfig.hacklifts.each do |lift|
-        f.puts "Hacklift.create(:sector => \"#{lift}\")"
+      hdconfig.hacklifts.each do |lift,dir|
+        f.puts "Hacklift.create(:sector => \"#{lift}\", :direction => \"#{dir}\")"
       end
 
       for i in 1..hdconfig.areas do
