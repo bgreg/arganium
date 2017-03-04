@@ -25,7 +25,7 @@ Arganium is a cooperative hacking shooter.  It blends old-school first person sh
 * Run `./setup` to configure your game
  * Alternatively place a YML configuration file in the Gloom directory.
 * Run `./setup <configname>.yml` to set up the Rails server.
-* Run `rails server` to start the server.
+* Run `rails server -b 0.0.0.0` to start the server.
 * Have Control team players connect to *http://\<server socket\>/* with their web browsers.
 * Have Marine team players connect to the Zandronum server with the appropriate *level wad* (supplied in `levels` directory) and *arganium.pk3* (supplied in the `assets` directory).
 * The game is live!  Gameplay is detailed in the [wiki](https://github.com/frozenfoxx/arganium/wiki/Gameplay).
