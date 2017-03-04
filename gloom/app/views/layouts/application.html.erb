@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gloom</title>
+		<title><%= build_title(show_env: true) %></title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,34 +9,35 @@
   </head>
 
   <body>
-		 <nav class="navbar navbar-default navbar-static-top">
-       <div class="container-fluid">
-           <img alt="Brand" src="/assets/logo-welcome.png" height="30" width="30" id="brand-image" class="pull-left">
-         <div class="navbar-header">
-           <a class="navbar-brand" href="#">Gloom </a>
-         </div>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <img alt="Brand" src="/assets/logo-welcome.png" height="30" width="30" id="brand-image" class="pull-left">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Gloom </a>
+        </div>
 
-           <ul class="nav navbar-nav">
-             <li class="active"> <%= link_to "Control Room", 'rooms' %> </li>
-             <li> <%= link_to "Scores", 'scores' %> </li>
-           </ul>
-       </div>
-     </nav>
+        <ul class="nav navbar-nav">
+          <li class="<%= active_on_nav(/rooms/) %>"> <%= link_to "Control Room", 'rooms' %> </li>
+          <li class="<%= active_on_nav(/scores/) %>"> <%= link_to "Scores", 'scores' %> </li>
+        </ul>
+      </div>
+    </nav>
 
     <div id="main-container" class="container-fluid">
       <div class="row">
-        <div id="header">
-          <%= yield :header %>
+        <div id="main-content" class="col-md-8">
+          <div class="well">
+            <%= yield %>
+          </div>
+        </div>
+
+        <div id="sidebar" class="col-md-4">
+          <div class="well">
+            <%= yield :sidebar %>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div id="main-content" class="col-md-8">
-          <!-- main content -->
-          <%= yield %>
-        </div>
-        <div id="sidebar" class="col-md-4">
-          <!-- sidebar content -->
-          <%= yield :sidebar %>
-        </div>
+    </div>
+
   </body>
 </html>

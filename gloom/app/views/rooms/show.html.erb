@@ -1,7 +1,4 @@
-<% content_for :header do %>
-  <h1>Control Room</h1>
-<% end %>
-
+<% content_for :title, "Control Room" %>
 <h2>Core Challenges</h2>
 <div id="corechallenges">
   <%= render @corechallenges %>
@@ -20,11 +17,11 @@
       Redeem
     </button>
   </div>
-  
+
   <!-- Modal -->
   <div id="powerupModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-  
+
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -61,15 +58,15 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-  
+
     </div>
   </div>
-  
+
   <h2>Hacklifts</h2>
   <div id="hacklifts">
     <%= render @hacklifts %>
   </div>
-  
+
   <h2>Messages</h2>
   <div id="messages">
     <%= render @messages %>
